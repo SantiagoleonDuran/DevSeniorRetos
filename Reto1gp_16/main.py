@@ -1,6 +1,6 @@
 from datetime import datetime
 import statistics 
-ListaExperimentos=[]
+
 
 
 class InvestigacionCientifica:
@@ -75,7 +75,8 @@ def eliminarExperimento():
 def compararExperimento():
     pass
 
-def generarInforme():
+def generarInforme(ListaExperimentos):
+    
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
@@ -83,11 +84,11 @@ def generarInforme():
     with open("informe_investigacion_cientifica.txt", "w") as informe: 
         #se escriben los detalles de la investigacion cientifica
         for experimento in ListaExperimentos:
-            archivo.Write(f"\nNombre experimento:  {experimento.nombreExperimento}")
-            archivo.Write(f"\nFecha Experimento: {experimento.fechaExperimento}")
-            archivo.Write(f"\nTipo Experimento: {experimento.tipoExperimento}") 
-            archivo.Write(f"\nComparar Experimento : {experimento.compararExperimento}")
-            archivo.write("\n")
+            informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}")
+            informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}")
+            informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}") 
+            informe.write(f"\nComparar Experimento : {experimento.compararExperimento}")
+            informe.write("\n")
             print ("informe gnerado como informe_investigacion_cientifica.txt")
 
 
@@ -100,6 +101,7 @@ def validar_seleccion_menu(dato_entrada):
     
 def menuInvestigacionCientifica():
     count = 0
+    ListaExperimentos=[]
     
     while True:
         print('\n ===============Bienvenido al sistema de Investigación cientifica=============== ')
