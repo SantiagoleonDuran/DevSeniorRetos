@@ -85,6 +85,7 @@ def menuInvestigacionCientifica():
                 count += 1
                 agregarExperimento(ListaExperimentos, count)
             if opcionSeleccionada == 7:
+            
                 break
         else:
             print('Seleccione una opción valida')
