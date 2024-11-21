@@ -50,7 +50,12 @@ def visualizarExperimento(ListaExperimentos):
         
     for i, experimento in enumerate(ListaExperimentos, star=1):
             print(f"\nexperimento {i}")
-            print(f"")
+            print(f"\nNombre experimento:  {experimento.nombreExperimento}")
+            print(f"\nFecha Experimento: {experimento.fechaExperimento.strtime('%d/%m/%Y')}")
+            print(f"\nTipo Experimento: {experimento.tipoExperimento}")
+            
+def promedio():
+    pass
 
 
     
