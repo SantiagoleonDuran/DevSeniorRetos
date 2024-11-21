@@ -86,6 +86,7 @@ def generarInforme():
             archivo.Write(f"\nNombre experimento:  {experimento.nombreExperimento}")
             archivo.Write(f"\nFecha Experimento: {experimento.fechaExperimento}")
             archivo.Write(f"\nTipo Experimento: {experimento.tipoExperimento}") 
+            archivo.Write(f"\nComparar Experimento : {experimento.compararExperimento}")
             archivo.write("\n")
             print ("informe gnerado como informe_investigacion_cientifica.txt")
 
