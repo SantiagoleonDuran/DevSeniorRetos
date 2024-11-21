@@ -44,21 +44,22 @@ def agregarExperimento(listaExperimentos):
     print("Experimento agregado exitosamente")
     
 def visualizarExperimento(ListaExperimentos):
-    if not ListaExperimentos:
+    if len(ListaExperimentos) <=0:
         print("NO hay experimentos registrados")
         return
         
-    for i, experimento in enumerate(ListaExperimentos, star=1):
-            print(f"\nexperimento {i}")
-            print(f"\nNombre experimento:  {experimento.nombreExperimento}")
-            print(f"\nFecha Experimento: {experimento.fechaExperimento.strtime('%d/%m/%Y')}")
-            print(f"\nTipo Experimento: {experimento.tipoExperimento}")
-            
+    for item in ListaExperimentos:
+         
+        print(f"\nNombre experimento:  {item.nombreExperimento}")
+        print(f"\nFecha Experimento: {item.fechaExperimento}")
+        print(f"\nTipo Experimento: {item.tipoExperimento}")
+        
 def analizarpromedio(ListaExperimentos):
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
-
-    promedio = statistics.mean(experimento.resultados)
+        return
+    for experimento in ListaExperimentos:
+          promedio = statistics.mean(experimento.resultados)
     maximo=max(experimento.resultados)
     minimo=min(experimento.resultados)
     print(f"El promedio de los resultados es: {promedio}")
@@ -106,14 +107,15 @@ def menuInvestigacionCientifica():
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
                 agregarExperimento(ListaExperimentos)
-            
+            if int(opcionSeleccionada) == 2:
+                visualizarExperimento(ListaExperimentos)
             if opcionSeleccionada == 7:
                 break
         else:
             print('Seleccione una opción valida')
     
-    if __name__ == '__main__': 
-        menuInvestigacionCientifica()
+if __name__ == '__main__': 
+    menuInvestigacionCientifica()
 
 
 
