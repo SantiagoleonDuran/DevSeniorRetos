@@ -33,9 +33,13 @@ def agregarExperimento(listaExperimentos):
         else:
             print('Debe seleccionar el tipo de experimento valido')
         
-    resultados = input('Ingrese los resultados separados por coma')
+    try:
+        resultados = input('Ingrese los resultados separados por coma')
+        resultados_separado = list(map(float, resultados.split(","))) 
+    except Exception as ex:
+        print('resultados ingresados no validos solo se permite valores numericos')
         
-    investigacionAdd= InvestigacionCientifica(nombreExperimento,fechaExperimento,tipoExperimento, resultados)
+    investigacionAdd= InvestigacionCientifica(nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado)
     listaExperimentos.append(investigacionAdd)
     print("Experimento agregado exitosamente")
     
