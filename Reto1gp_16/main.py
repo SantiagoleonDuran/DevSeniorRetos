@@ -109,10 +109,17 @@ def menuInvestigacionCientifica():
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
-                count += 1
-                agregarExperimento(ListaExperimentos, count)
-            if opcionSeleccionada == 7:
-            
+                agregarExperimento(ListaExperimentos)
+            if int(opcionSeleccionada) == 2:
+                visualizarExperimento(ListaExperimentos)
+            if int(opcionSeleccionada) == 3:
+                eliminarExperimento(ListaExperimentos)
+            if int(opcionSeleccionada) == 4:
+                generarInforme(ListaExperimentos)
+          
+            if  int(opcionSeleccionada) == 5:
+               analizarpromedio(ListaExperimentos)
+            if opcionSeleccionada == 6:
                 break
         else:
             print('Seleccione una opción valida')
