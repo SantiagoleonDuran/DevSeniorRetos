@@ -69,8 +69,11 @@ def analizarpromedio(ListaExperimentos):
     print(f"El maximo de los resultados es: {maximo}")
     print(f"El minimo de los resultados es: {minimo}")
 
-def eliminarExperimento():
-    pass
+def eliminarExperimento(ListaExperimentos, IdExperimento):
+    ListaExperimentos.remove(IdExperimento)
+    print('La eliminación se realizo con exito')
+    visualizarExperimento(ListaExperimentos)
+    
 
 def compararExperimento():
     pass
@@ -104,14 +107,19 @@ def menuInvestigacionCientifica():
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
-                agregarExperimento(ListaExperimentos)
+                agregarExperimento(ListaExperimentos, count+1)
             if int(opcionSeleccionada) == 2:
                 visualizarExperimento(ListaExperimentos)
             if int(opcionSeleccionada) == 3:
-                eliminarExperimento(ListaExperimentos)
+                while True:
+                    IdExperimento = input('Ingrese el Id del experimento que desea eliminar')
+                    if validar_seleccion_menu(IdExperimento):
+                        eliminarExperimento(ListaExperimentos, IdExperimento)
+                        break
+                    else:
+                        print('El Id ingresado no es valido')
             if int(opcionSeleccionada) == 4:
                 generarInforme(ListaExperimentos)
-          
             if  int(opcionSeleccionada) == 5:
                analizarpromedio(ListaExperimentos)
             if opcionSeleccionada == 6:
