@@ -70,15 +70,9 @@ def analizarpromedio(ListaExperimentos):
     print(f"El minimo de los resultados es: {minimo}")
 
 
-
-
-
-
-    
-
-
-def eliminarExperimento():
-    pass
+def eliminarExperimento(ListaExperimentos, IdExperimento):
+    ListaExperimentos.remove(IdExperimento)
+    print('La operación de eliminar se realizo exitosamente')
 
 def compararExperimento():
     pass
