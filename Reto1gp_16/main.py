@@ -47,6 +47,12 @@ def visualizarExperimento():
     
     pass
 
+def eliminarExperimento():
+    pass
+
+def actualizarExperimento():
+    pass
+
 def compararExperimento():
     pass
 
@@ -66,10 +72,11 @@ def menuInvestigacionCientifica():
         print('\n ===============Bienvenido al sistema de Investigación cientifica=============== ')
         print('====Selecciona la opción que desea realizar====')
         print('\n')
-        print('1) Agregar experimento')
-        print('2) Visualizar experimento')
-        print('3) eliminar experimento')
-        print('4) actualizar experimento')
+        print('1) Agregar experimento ')
+        print('2) Visualizar experimento ')
+        print('3) eliminar experimento ')
+        print('4) actualizar experimento ')
+        print('5) Generar informe ')
         print('5) Salir (exit)')
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
