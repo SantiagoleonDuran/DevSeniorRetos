@@ -46,9 +46,36 @@ def agregarExperimento(listaExperimentos, count):
     listaExperimentos.append(investigacionAdd)
     print("Experimento agregado exitosamente")
     
-def visualizarExperimento():
+def visualizarExperimento(ListaExperimentos):
+    if len(ListaExperimentos) <=0:
+        print("NO hay experimentos registrados")
+        return
+        
+    for item in ListaExperimentos:
+         
+        print(f"\nNombre experimento:  {item.nombreExperimento}")
+        print(f"\nFecha Experimento: {item.fechaExperimento}")
+        print(f"\nTipo Experimento: {item.tipoExperimento}")
+        
+def analizarpromedio(ListaExperimentos):
+    if not ListaExperimentos:
+        print("NO hay experimentos registrados")
+        return
+    for experimento in ListaExperimentos:
+          promedio = statistics.mean(experimento.resultados)
+    maximo=max(experimento.resultados)
+    minimo=min(experimento.resultados)
+    print(f"El promedio de los resultados es: {round(promedio,2)}  ")
+    print(f"El maximo de los resultados es: {maximo}")
+    print(f"El minimo de los resultados es: {minimo}")
+
+
+
+
+
+
     
-    pass
+
 
 def eliminarExperimento():
     pass
@@ -75,10 +102,10 @@ def menuInvestigacionCientifica():
         print('\n')
         print('1) Agregar experimento ')
         print('2) Visualizar experimento ')
-        print('3) eliminar experimento ')
-        print('4) actualizar experimento ')
-        print('5) Generar informe ')
-        print('5) Salir (exit)')
+        print('3) Eliminar experimento ')
+        print('4) Generar informe ')
+        print('5) Promedio experimento ')
+        print('6) Salir (exit)')
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
@@ -90,8 +117,8 @@ def menuInvestigacionCientifica():
         else:
             print('Seleccione una opción valida')
     
-    
-menuInvestigacionCientifica()
+if __name__ == '__main__': 
+    menuInvestigacionCientifica()
 
 
 
