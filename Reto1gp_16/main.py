@@ -54,7 +54,9 @@ def visualizarExperimento(ListaExperimentos):
             print(f"\nFecha Experimento: {experimento.fechaExperimento.strtime('%d/%m/%Y')}")
             print(f"\nTipo Experimento: {experimento.tipoExperimento}")
             
-def promedio():
+def analizarpromedio(ListaExperimentos):
+    if not ListaExperimentos:
+        print("NO hay experimentos registrados")
 
     promedio = statistics.mean(experimento.resultados)
     maximo=max(experimento.resultados)
