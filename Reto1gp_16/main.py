@@ -1,6 +1,8 @@
 from datetime import datetime
-import statistics 
-ListaExperimentos=[]
+import statistics
+import os.path 
+
+
 
 
 class InvestigacionCientifica:
@@ -75,20 +77,22 @@ def eliminarExperimento():
 def compararExperimento():
     pass
 
-def generarInforme():
+def generarInforme(ListaExperimentos):
+    nombreInforme="informe_investigacion_cientifica.txt"
+    path=os.path.abspath(nombreInforme)
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
      # se abre un archivo txt para escribir el informe
-    with open("informe_investigacion_cientifica.txt", "w") as informe: 
+    with open(path, "w") as informe: 
         #se escriben los detalles de la investigacion cientifica
-        for experimento in ListaExperimentos:
-            archivo.Write(f"\nNombre experimento:  {experimento.nombreExperimento}")
-            archivo.Write(f"\nFecha Experimento: {experimento.fechaExperimento}")
-            archivo.Write(f"\nTipo Experimento: {experimento.tipoExperimento}") 
-            archivo.Write(f"\nComparar Experimento : {experimento.compararExperimento}")
-            archivo.write("\n")
-            print ("informe gnerado como informe_investigacion_cientifica.txt")
+     for experimento in ListaExperimentos:
+        informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
+        informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}\n")
+        informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}\n") 
+      
+        informe.write("\n")
+        print("informe generado como informe_investigacion_cientifica.txt")
 
 
 def validar_seleccion_menu(dato_entrada):
@@ -99,8 +103,16 @@ def validar_seleccion_menu(dato_entrada):
         
     
 def menuInvestigacionCientifica():
+    ListaExperimentos=[]
     count = 0
     
+    # file name    
+    file_name = 'GFG.txt'
+  
+  
+    # prints the absolute path of current 
+    # working directory with  file name 
+    print(os.path.abspath(file_name))
     while True:
         print('\n ===============Bienvenido al sistema de Investigación cientifica=============== ')
         print('====Selecciona la opción que desea realizar====')
@@ -114,7 +126,7 @@ def menuInvestigacionCientifica():
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
-                agregarExperimento(ListaExperimentos)
+                agregarExperimento(ListaExperimentos, count+1)
             if int(opcionSeleccionada) == 2:
                 visualizarExperimento(ListaExperimentos)
             if int(opcionSeleccionada) == 3:
@@ -130,7 +142,7 @@ def menuInvestigacionCientifica():
             print('Seleccione una opción valida')
     
 if __name__ == '__main__': 
-    menuInvestigacionCientifica()
+  menuInvestigacionCientifica()
 
 
 
