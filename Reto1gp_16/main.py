@@ -62,7 +62,7 @@ def analizarpromedio(ListaExperimentos):
           promedio = statistics.mean(experimento.resultados)
     maximo=max(experimento.resultados)
     minimo=min(experimento.resultados)
-    print(f"El promedio de los resultados es: {promedio}")
+    print(f"El promedio de los resultados es: {round(promedio,2)}  ")
     print(f"El maximo de los resultados es: {maximo}")
     print(f"El minimo de los resultados es: {minimo}")
 
@@ -100,16 +100,19 @@ def menuInvestigacionCientifica():
         print('\n')
         print('1) Agregar experimento ')
         print('2) Visualizar experimento ')
-        print('3) eliminar experimento ')
+        print('3) Eliminar experimento ')
         print('4) Generar informe ')
-        print('5) Salir (exit)')
+        print('5) Promedio experimento ')
+        print('6) Salir (exit)')
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
                 agregarExperimento(ListaExperimentos)
             if int(opcionSeleccionada) == 2:
                 visualizarExperimento(ListaExperimentos)
-            if opcionSeleccionada == 7:
+            if int(opcionSeleccionada) == 5:
+                analizarpromedio(ListaExperimentos)
+            if opcionSeleccionada == 6:
                 break
         else:
             print('Seleccione una opción valida')
