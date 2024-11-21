@@ -9,25 +9,29 @@ class InvestigacionCientifica:
         self.fechaExperimento=fechaExperimento
         self.tipoExperimento=tipoExperimento
         self.resultados = resultados
+        
+    def to_dict(self):
+        return ([(k, getattr(self, k)) for k in self.__dict__.keys() if not k.startswith("_")])
 
 # funcion para agregar experimento 
 def agregarExperimento(listaExperimentos):
     
-    print('\n============Agregar Experimentos ===============\n')
-    nombreExperimento=input("\nIngrese el nombre del experimento:")
+    print('\n===============  Agregar Experimentos  ===============\n')
+    nombreExperimento=input("\nIngrese el nombre del experimento: ")
     fechaExperimento_str=input("\ningrese la fecha del experimento  (DD/MM/AAAA):")
     try:
         fechaExperimento=datetime.strptime(fechaExperimento_str,"%d/%m/%Y")
     except Exception as ex:
         print(f"fecha invalida :{ex}")
         return
-    tipoDeExperimento=input("\nIngrese el tipo de experimento \n 1) fisica, \n 2) biologia, \n 3) quimica:")
-
-        
-    if tipoDeExperimento.lower() == 'fisica' or tipoDeExperimento.lower() == 'biologia' or tipoDeExperimento.lower() == 'quimica':
-        tipoExperimento = tipoDeExperimento
-    else:
-        print('Debe seleccionar el tipo de experimento valido')
+    
+    while True:
+        tipoDeExperimento=input("\nIngrese el tipo de experimento \n 1) fisica, \n 2) biologia, \n 3) quimica: \n")
+        if (tipoDeExperimento.lower() == 'fisica') or tipoDeExperimento.lower() == 'biologia' or tipoDeExperimento.lower() == 'quimica':
+            tipoExperimento = tipoDeExperimento
+            break
+        else:
+            print('Debe seleccionar el tipo de experimento valido')
         
     resultados = input('Ingrese los resultados separados por coma')
         
@@ -35,8 +39,55 @@ def agregarExperimento(listaExperimentos):
     listaExperimentos.append(investigacionAdd)
     print("Experimento agregado exitosamente")
     
+def visualizarExperimento():
+    
+    pass
 
-agregarExperimento(ListaExperimentos)
+def compararExperimento():
+    pass
+
+def generarInforme():
+    pass
+
+def validar_seleccion_menu(dato_entrada):
+    try:
+        return int(dato_entrada)
+    except Exception as ex:
+        return False
+        
+    
+def menuInvestigacionCientifica():
+    
+    while True:
+        print('\n ===============Bienvenido al sistema de Investigación cientifica=============== ')
+        print('====Selecciona la opción que desea realizar====')
+        print('\n')
+        print('1) Agregar experimento')
+        print('2) Visualizar experimento')
+        print('3) eliminar experimento')
+        print('4) actualizar experimento')
+        print('5) Salir (exit)')
+        opcionSeleccionada = input('****Seleccione Opción**** \n')
+        if validar_seleccion_menu(opcionSeleccionada):
+            if int(opcionSeleccionada) == 1:
+                agregarExperimento(ListaExperimentos)
+            
+            if opcionSeleccionada == 7:
+                break
+        else:
+            print('Seleccione una opción valida')
+    
+    
+menuInvestigacionCientifica()
+
+
+
+
+
+
+
+
+    
         
 
        
