@@ -55,7 +55,17 @@ def visualizarExperimento(ListaExperimentos):
             print(f"\nTipo Experimento: {experimento.tipoExperimento}")
             
 def promedio():
-    pass
+
+    promedio = statistics.mean(experimento.resultados)
+    maximo=max(experimento.resultados)
+    minimo=min(experimento.resultados)
+    print(f"El promedio de los resultados es: {promedio}")
+    print(f"El maximo de los resultados es: {maximo}")
+    print(f"El minimo de los resultados es: {minimo}")
+
+
+
+
 
 
     
