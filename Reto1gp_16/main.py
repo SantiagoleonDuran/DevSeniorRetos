@@ -69,14 +69,6 @@ def analizarpromedio(ListaExperimentos):
     print(f"El maximo de los resultados es: {maximo}")
     print(f"El minimo de los resultados es: {minimo}")
 
-
-
-
-
-
-    
-
-
 def eliminarExperimento():
     pass
 
@@ -84,7 +76,10 @@ def compararExperimento():
     pass
 
 def generarInforme():
-    pass
+    if not ListaExperimentos:
+        print("NO hay experimentos registrados")
+        return
+     # se abre un archivo txt para escribir nombre 
 
 def validar_seleccion_menu(dato_entrada):
     try:
