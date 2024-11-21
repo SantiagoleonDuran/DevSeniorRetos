@@ -1,6 +1,6 @@
 from datetime import datetime
 import statistics 
-ListaExperimentos=[]
+
 
 class InvestigacionCientifica:
     # metodo constructor , init es para inicializar el metodo 
@@ -43,15 +43,23 @@ def agregarExperimento(listaExperimentos):
     listaExperimentos.append(investigacionAdd)
     print("Experimento agregado exitosamente")
     
-def visualizarExperimento():
+def visualizarExperimento(ListaExperimentos):
+    if not ListaExperimentos:
+        print("NO hay experimentos registrados")
+        return
+        
+    for i, experimento in enumerate(ListaExperimentos, star=1):
+            print(f"\nexperimento {i}")
+            print(f"")
+
+
     
-    pass
+
 
 def eliminarExperimento():
     pass
 
-def actualizarExperimento():
-    pass
+
 
 def compararExperimento():
     pass
@@ -67,7 +75,7 @@ def validar_seleccion_menu(dato_entrada):
         
     
 def menuInvestigacionCientifica():
-    
+    ListaExperimentos=[]
     while True:
         print('\n ===============Bienvenido al sistema de Investigación cientifica=============== ')
         print('====Selecciona la opción que desea realizar====')
@@ -75,8 +83,7 @@ def menuInvestigacionCientifica():
         print('1) Agregar experimento ')
         print('2) Visualizar experimento ')
         print('3) eliminar experimento ')
-        print('4) actualizar experimento ')
-        print('5) Generar informe ')
+        print('4) Generar informe ')
         print('5) Salir (exit)')
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
@@ -88,8 +95,8 @@ def menuInvestigacionCientifica():
         else:
             print('Seleccione una opción valida')
     
-    
-menuInvestigacionCientifica()
+    if __name__ == '__main__': 
+        menuInvestigacionCientifica()
 
 
 
