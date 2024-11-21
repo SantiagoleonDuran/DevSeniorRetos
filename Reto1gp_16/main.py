@@ -79,7 +79,16 @@ def generarInforme():
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
-     # se abre un archivo txt para escribir nombre 
+     # se abre un archivo txt para escribir el informe
+    with open("informe_investigacion_cientifica.txt", "w") as informe: 
+        #se escriben los detalles de la investigacion cientifica
+        for experimento in ListaExperimentos:
+            archivo.Write(f"\nNombre experimento:  {experimento.nombreExperimento}")
+            archivo.Write(f"\nFecha Experimento: {experimento.fechaExperimento}")
+            archivo.Write(f"\nTipo Experimento: {experimento.tipoExperimento}") 
+            archivo.write("\n")
+            print ("informe gnerado como informe_investigacion_cientifica.txt")
+
 
 def validar_seleccion_menu(dato_entrada):
     try:
