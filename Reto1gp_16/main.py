@@ -2,9 +2,11 @@ from datetime import datetime
 import statistics 
 ListaExperimentos=[]
 
+
 class InvestigacionCientifica:
     # metodo constructor , init es para inicializar el metodo 
-    def __init__(self,nombreExperimento,fechaExperimento,tipoExperimento, resultados):
+    def __init__(self,IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados):
+        self.IdExperimento = IdExperimento
         self.nombreExperimento=nombreExperimento
         self.fechaExperimento=fechaExperimento
         self.tipoExperimento=tipoExperimento
@@ -14,8 +16,9 @@ class InvestigacionCientifica:
         return ([(k, getattr(self, k)) for k in self.__dict__.keys() if not k.startswith("_")])
 
 # funcion para agregar experimento 
-def agregarExperimento(listaExperimentos):
+def agregarExperimento(listaExperimentos, count):
     
+    IdExperimento = count
     print('\n===============  Agregar Experimentos  ===============\n')
     nombreExperimento=input("\nIngrese el nombre del experimento: ")
     fechaExperimento_str=input("\ningrese la fecha del experimento  (DD/MM/AAAA):")
@@ -34,12 +37,12 @@ def agregarExperimento(listaExperimentos):
             print('Debe seleccionar el tipo de experimento valido')
         
     try:
-        resultados = input('Ingrese los resultados separados por coma')
+        resultados = input('Ingrese los resultados separados por coma \n')
         resultados_separado = list(map(float, resultados.split(","))) 
     except Exception as ex:
         print('resultados ingresados no validos solo se permite valores numericos')
         
-    investigacionAdd= InvestigacionCientifica(nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado)
+    investigacionAdd= InvestigacionCientifica(IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado)
     listaExperimentos.append(investigacionAdd)
     print("Experimento agregado exitosamente")
     
@@ -48,9 +51,6 @@ def visualizarExperimento():
     pass
 
 def eliminarExperimento():
-    pass
-
-def actualizarExperimento():
     pass
 
 def compararExperimento():
@@ -67,6 +67,7 @@ def validar_seleccion_menu(dato_entrada):
         
     
 def menuInvestigacionCientifica():
+    count = 0
     
     while True:
         print('\n ===============Bienvenido al sistema de Investigación cientifica=============== ')
@@ -81,8 +82,8 @@ def menuInvestigacionCientifica():
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
-                agregarExperimento(ListaExperimentos)
-            
+                count += 1
+                agregarExperimento(ListaExperimentos, count)
             if opcionSeleccionada == 7:
                 break
         else:
