@@ -1,6 +1,9 @@
 from datetime import datetime
-import statistics 
+
+import statistics
 import os.path 
+
+
 
 
 
@@ -107,7 +110,15 @@ def validar_seleccion_menu(dato_entrada):
 def menuInvestigacionCientifica():
     ListaExperimentos=[]
     count = 0
+    ListaExperimentos=[]
     
+    # file name    
+    file_name = 'GFG.txt'
+  
+  
+    # prints the absolute path of current 
+    # working directory with  file name 
+    print(os.path.abspath(file_name))
     while True:
         print('\n ===============Bienvenido al sistema de Investigación cientifica=============== ')
         print('====Selecciona la opción que desea realizar====')
@@ -142,7 +153,9 @@ def menuInvestigacionCientifica():
             print('Seleccione una opción valida')
     
 if __name__ == '__main__': 
-      menuInvestigacionCientifica()
+
+  menuInvestigacionCientifica()
+
 
 
 

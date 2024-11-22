@@ -1,0 +1,4 @@
+
+Nombre experimento:  prueba
+Fecha Experimento: 02/02/2024
+Tipo Experimento: fisica
