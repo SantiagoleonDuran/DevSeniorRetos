@@ -83,21 +83,21 @@ def compararExperimento():
     pass
 
 def generarInforme(ListaExperimentos):
-    nombreInforme="informe_investigacion_cientifica.txt"
-    path=os.path.abspath(nombreInforme)
+    nombreInforme = "informe_investigacion_cientifica.txt"
+    path = os.path.abspath(nombreInforme)
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
-     # se abre un archivo txt para escribir el informe
-    with open(path, "w") as informe: 
-        #se escriben los detalles de la investigacion cientifica
-     for experimento in ListaExperimentos:
-        informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
-        informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}\n")
-        informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}\n") 
-      
-        informe.write("\n")
-        print("informe generado como informe_investigacion_cientifica.txt")
+    
+    with open(path, "w") as informe:
+        for experimento in ListaExperimentos:
+            informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
+            informe.write(f"Fecha Experimento: {experimento.fechaExperimento}\n")
+            informe.write(f"Tipo Experimento: {experimento.tipoExperimento}\n")
+            informe.write("Resultados: " + ", ".join(map(str, experimento.resultados)) + "\n")
+            informe.write("\n")
+    
+    print("Informe generado como informe_investigacion_cientifica.txt")
 
 
 def validar_seleccion_menu(dato_entrada):
