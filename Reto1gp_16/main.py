@@ -91,13 +91,13 @@ def generarInforme(ListaExperimentos):
      # se abre un archivo txt para escribir el informe
     with open(path, "w") as informe: 
         #se escriben los detalles de la investigacion cientifica
-     for experimento in ListaExperimentos:
-        informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
-        informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}\n")
-        informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}\n") 
-      
-        informe.write("\n")
-        print("informe generado como informe_investigacion_cientifica.txt")
+        for experimento in ListaExperimentos:
+            informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
+            informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}\n")
+            informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}\n") 
+        
+            informe.write("\n")
+            print("informe generado como informe_investigacion_cientifica.txt")
 
 
 def validar_seleccion_menu(dato_entrada):
@@ -110,7 +110,7 @@ def validar_seleccion_menu(dato_entrada):
 def menuInvestigacionCientifica():
     ListaExperimentos=[]
     count = 0
-    ListaExperimentos=[]
+  
     
     # file name    
     file_name = 'GFG.txt'
@@ -153,7 +153,6 @@ def menuInvestigacionCientifica():
             print('Seleccione una opción valida')
     
 if __name__ == '__main__': 
-
   menuInvestigacionCientifica()
 
 
