@@ -1,7 +1,7 @@
 from datetime import datetime
 import statistics 
 import os.path 
-ListaExperimentos=[]
+
 
 
 class InvestigacionCientifica:
@@ -105,6 +105,7 @@ def validar_seleccion_menu(dato_entrada):
         
     
 def menuInvestigacionCientifica():
+    ListaExperimentos=[]
     count = 0
     
     while True:
