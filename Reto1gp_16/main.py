@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import statistics
-import os.path 
+import os 
 
 
 
@@ -83,21 +83,31 @@ def compararExperimento():
     pass
 
 def generarInforme(ListaExperimentos):
-    nombreInforme="informe_investigacion_cientifica.txt"
-    path=os.path.abspath(nombreInforme)
+    nombreInforme = "informe_investigacion_cientifica.txt"
+    path = os.path.abspath(nombreInforme)
+    directorio=os.path.dirname(path)    
+    if directorio and not os.path.exists(directorio):
+        os.makedirs(directorio)
+        print("Directorio creado exitosamente")
+    # Validar si hay experimentos registrados
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
-     # se abre un archivo txt para escribir el informe
-    with open(path, "w") as informe: 
-        #se escriben los detalles de la investigacion cientifica
-        for experimento in ListaExperimentos:
-            informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
-            informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}\n")
-            informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}\n") 
-        
-            informe.write("\n")
-            print("informe generado como informe_investigacion_cientifica.txt")
+    
+    try:
+        # Abrir el archivo para escritura
+        with open(path, "w") as informe:
+            for experimento in ListaExperimentos:
+                
+                informe.write(f"Nombre experimento: {experimento.nombreExperimento}\n")
+                informe.write(f"Fecha Experimento: {experimento.fechaExperimento}\n")
+                informe.write(f"Tipo Experimento: {experimento.tipoExperimento}\n")
+                informe.write("Resultados: " + ", ".join(map(str, experimento.resultados)) + "\n")
+                informe.write("\n") 
+        print("Informe generado exitosamente como informe_investigacion_cientifica.txt")
+    
+    except Exception as e:
+        print(f"Error al generar el informe: {e}")
 
 
 def validar_seleccion_menu(dato_entrada):
