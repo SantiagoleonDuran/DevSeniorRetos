@@ -83,6 +83,16 @@ def generarInforme():
         print("NO hay experimentos registrados")
         return
      # se abre un archivo txt para escribir nombre 
+    with open(path, "w") as informe: 
+        #se escriben los detalles de la investigacion cientifica
+     for experimento in ListaExperimentos:
+        informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
+        informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}\n")
+        informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}\n") 
+      
+        informe.write("\n")
+        print("informe generado como informe_investigacion_cientifica.txt")
+
 
 def validar_seleccion_menu(dato_entrada):
     try:
@@ -128,7 +138,7 @@ def menuInvestigacionCientifica():
             print('Seleccione una opción valida')
     
 if __name__ == '__main__': 
-    menuInvestigacionCientifica()
+      menuInvestigacionCientifica()
 
 
 
