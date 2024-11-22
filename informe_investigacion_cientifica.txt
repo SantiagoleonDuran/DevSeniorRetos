@@ -1,4 +1,6 @@
 
 Nombre experimento:  prueba
-Fecha Experimento: 02/02/2024
+Fecha Experimento: 2024-02-02 00:00:00
 Tipo Experimento: fisica
+Resultados: 1, 2, 3, 4, 5
+
