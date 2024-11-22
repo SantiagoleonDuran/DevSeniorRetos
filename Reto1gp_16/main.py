@@ -1,11 +1,7 @@
 from datetime import datetime
-<<<<<<< HEAD
 import statistics
 import os.path 
 
-=======
-import statistics 
->>>>>>> 9e58f4bf9485376ee913b65d9332e549e8b273ec
 
 
 
@@ -82,19 +78,14 @@ def compararExperimento():
     pass
 
 def generarInforme(ListaExperimentos):
-<<<<<<< HEAD
     nombreInforme="informe_investigacion_cientifica.txt"
     path=os.path.abspath(nombreInforme)
-=======
-    
->>>>>>> 9e58f4bf9485376ee913b65d9332e549e8b273ec
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
      # se abre un archivo txt para escribir el informe
     with open(path, "w") as informe: 
         #se escriben los detalles de la investigacion cientifica
-<<<<<<< HEAD
      for experimento in ListaExperimentos:
         informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
         informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}\n")
@@ -102,15 +93,6 @@ def generarInforme(ListaExperimentos):
       
         informe.write("\n")
         print("informe generado como informe_investigacion_cientifica.txt")
-=======
-        for experimento in ListaExperimentos:
-            informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}")
-            informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}")
-            informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}") 
-            informe.write(f"\nComparar Experimento : {experimento.compararExperimento}")
-            informe.write("\n")
-            print ("informe gnerado como informe_investigacion_cientifica.txt")
->>>>>>> 9e58f4bf9485376ee913b65d9332e549e8b273ec
 
 
 def validar_seleccion_menu(dato_entrada):
