@@ -1,6 +1,8 @@
 from datetime import datetime
+
 import statistics
 import os.path 
+
 
 
 
@@ -71,8 +73,11 @@ def analizarpromedio(ListaExperimentos):
     print(f"El maximo de los resultados es: {maximo}")
     print(f"El minimo de los resultados es: {minimo}")
 
-def eliminarExperimento():
-    pass
+def eliminarExperimento(ListaExperimentos, IdExperimento):
+    ListaExperimentos.remove(IdExperimento)
+    print('La eliminación se realizo con exito')
+    visualizarExperimento(ListaExperimentos)
+    
 
 def compararExperimento():
     pass
@@ -131,10 +136,15 @@ def menuInvestigacionCientifica():
             if int(opcionSeleccionada) == 2:
                 visualizarExperimento(ListaExperimentos)
             if int(opcionSeleccionada) == 3:
-                eliminarExperimento(ListaExperimentos)
+                while True:
+                    IdExperimento = input('Ingrese el Id del experimento que desea eliminar')
+                    if validar_seleccion_menu(IdExperimento):
+                        eliminarExperimento(ListaExperimentos, IdExperimento)
+                        break
+                    else:
+                        print('El Id ingresado no es valido')
             if int(opcionSeleccionada) == 4:
                 generarInforme(ListaExperimentos)
-          
             if  int(opcionSeleccionada) == 5:
                analizarpromedio(ListaExperimentos)
             if opcionSeleccionada == 6:
@@ -143,7 +153,9 @@ def menuInvestigacionCientifica():
             print('Seleccione una opción valida')
     
 if __name__ == '__main__': 
+
   menuInvestigacionCientifica()
+
 
 
 
