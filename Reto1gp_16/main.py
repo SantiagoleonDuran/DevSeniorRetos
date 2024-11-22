@@ -76,7 +76,7 @@ def analizarpromedio(ListaExperimentos):
 def eliminarExperimento(ListaExperimentos, IdExperimento):
     ListaExperimentos.remove(IdExperimento)
     print('La eliminación se realizo con exito')
- 
+    visualizarExperimento(ListaExperimentos)
     
 
 def compararExperimento():
