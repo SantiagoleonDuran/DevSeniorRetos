@@ -78,11 +78,13 @@ def eliminarExperimento(ListaExperimentos, IdExperimento):
 def compararExperimento():
     pass
 
-def generarInforme():
+def generarInforme(ListaExperimentos):
+    nombreInforme="informe_investigacion_cientifica.txt"
+    path=os.path.abspath(nombreInforme)
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
-     # se abre un archivo txt para escribir nombre 
+     # se abre un archivo txt para escribir el informe
     with open(path, "w") as informe: 
         #se escriben los detalles de la investigacion cientifica
      for experimento in ListaExperimentos:
