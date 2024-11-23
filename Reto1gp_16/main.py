@@ -57,7 +57,7 @@ def visualizarExperimento(ListaExperimentos):
         return
         
     for item in ListaExperimentos:
-         
+        print(f"\nId Experimento: {item.IdExperimento}") 
         print(f"\nNombre experimento:  {item.nombreExperimento}")
         print(f"\nFecha Experimento: {item.fechaExperimento}")
         print(f"\nTipo Experimento: {item.tipoExperimento}")
@@ -85,8 +85,21 @@ def eliminarExperimento(ListaExperimentos, IdExperimento):
     visualizarExperimento(ListaExperimentos)
     
 
-def compararExperimento():
-    pass
+def compararExperimento(ListaExperimentos):
+    visualizarExperimento()
+    IdExperimento=list(map(int, input("\nIngrese el Id del experimento a comparar: ").split(",")))
+    resultado_comparados=[]
+    for index in IdExperimento:
+        if(index == IdExperimento[0]):
+            promedio=sum(ListaExperimentos.promedio)/len(ListaExperimentos.resultados)
+            resultado_comparados.append(promedio)
+        else:
+            print(f"El id {index} no se encuentra registrado")
+    resultado_comparados.sort()
+    print(f"resultado comparados")
+    for experimento, promedio in resultado_comparados:
+        print(f"El experimento {experimento} - {promedio}")
+  
 
 def generarInforme(ListaExperimentos):
     nombreInforme = "informe_investigacion_cientifica.txt"
@@ -145,7 +158,8 @@ def menuInvestigacionCientifica():
         print('3) Eliminar experimento ')
         print('4) Generar informe ')
         print('5) Promedio experimento ')
-        print('6) Salir (exit)')
+        print('6) Comparar experimento ')
+        print('7) Salir (exit)')
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
@@ -164,7 +178,9 @@ def menuInvestigacionCientifica():
                 generarInforme(ListaExperimentos)
             if  int(opcionSeleccionada) == 5:
                analizarPromedio(ListaExperimentos)
-            if opcionSeleccionada == 6:
+            if  int(opcionSeleccionada) == 6:
+                compararExperimento(ListaExperimentos)                               
+            if opcionSeleccionada == 7:
                 break
         else:
             print('Seleccione una opción valida')
