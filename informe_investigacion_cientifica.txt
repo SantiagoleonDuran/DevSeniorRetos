@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Nombre experimento: prueba1
 Fecha Experimento: 2024-12-01 00:00:00
 Tipo Experimento: fisica
@@ -10,3 +11,9 @@ Tipo Experimento: quimica
 Resultados: 20.0, 20.0, 20.0
 Promedio: 20.0 
 
+=======
+Id Experimento: 1Nombre experimento: datos 1Fecha Experimento: 2024-10-20 00:00:00Tipo Experimento: fisicaResultados: 20.0, 30.0, 40.0
+Promedio: 0.0
+Id Experimento: 2Nombre experimento: datos 2Fecha Experimento: 2024-10-20 00:00:00Tipo Experimento: biologiaResultados: 20.0, 30.0, 50.0
+Promedio: 0.0
+>>>>>>> 1eb7a06558eaf4136fa628cd8880b55b620304e9
