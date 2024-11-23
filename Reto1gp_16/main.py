@@ -97,20 +97,52 @@ def eliminarExperimento(ListaExperimentos, IdExperimento):
     
 # funcion para realizar comparaciones de experimentos con su promedio 
 def compararExperimento(ListaExperimentos):
+    """
+    Compara el promedio de los resultados de experimentos seleccionados por su ID.
     
-    visualizarExperimento()
-    IdExperimento=list(map(int, input("\nIngrese el Id del experimento a comparar: ").split(",")))
-    resultado_comparados=[]
-    for index in IdExperimento:
-         if(index == IdExperimento[0]):
-             promedio=sum(ListaExperimentos.promedio)/len(ListaExperimentos.resultados)
-             resultado_comparados.append(promedio)
-         else:
-             print(f"El id {index} no se encuentra registrado")
-             resultado_comparados.sort()
-             print(f"resultado comparados")
-    for experimento, promedio in resultado_comparados:
-         print(f"El experimento {experimento} - {promedio}")
+    :param ListaExperimentos: Lista que contiene los experimentos registrados.
+    """
+    if not ListaExperimentos:
+        print("No hay experimentos registrados para comparar.")
+        return
+
+    # Mostrar todos los experimentos disponibles
+    print("\nLista de experimentos registrados:")
+    for experimento in ListaExperimentos:
+        print(f"ID: {experimento.IdExperimento} - Nombre: {experimento.nombreExperimento}")
+
+    # Solicitar al usuario los IDs de los experimentos a comparar
+    ids_input = input("\nIngrese los IDs de los experimentos a comparar, separados por comas: ").strip()
+    try:
+        ids_seleccionados = [int(id.strip()) for id in ids_input.split(",") if id.strip().isdigit()]
+    except ValueError:
+        print("Por favor, ingrese valores numéricos válidos.")
+        return
+
+    if not ids_seleccionados:
+        print("No se ingresaron IDs válidos.")
+        return
+
+    # Filtrar los experimentos correspondientes a los IDs ingresados
+    experimentos_comparar = [exp for exp in ListaExperimentos if exp.IdExperimento in ids_seleccionados]
+
+    if not experimentos_comparar:
+        print("Ninguno de los IDs ingresados coincide con los experimentos registrados.")
+        return
+
+    # Calcular y mostrar los promedios de cada experimento
+    resultados_comparados = []
+    for experimento in experimentos_comparar:
+        promedio = statistics.mean(experimento.resultados)
+        resultados_comparados.append((experimento.nombreExperimento, promedio))
+
+    # Ordenar los resultados por promedio
+    resultados_comparados.sort(key=lambda x: x[1])
+
+    # Mostrar los resultados
+    print("\nResultados de la comparación (ordenados por promedio):")
+    for nombre, promedio in resultados_comparados:
+        print(f"Experimento: {nombre} - Promedio: {promedio:.2f}")
   
 # Función para generar un informe en un archivo de texto
 # Incluye los datos principales de cada experimento registrado
