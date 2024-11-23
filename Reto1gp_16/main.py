@@ -6,7 +6,7 @@ import os
 
 
 
-
+# Clase principal que representa un experimento de investigación científica
 class InvestigacionCientifica:
     # metodo constructor , init es para inicializar el metodo 
     def __init__(self,IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados,analizarPromedio):
@@ -16,23 +16,25 @@ class InvestigacionCientifica:
         self.tipoExperimento=tipoExperimento
         self.resultados = resultados
         self.analizarPromedio=analizarPromedio
-        
+     # Método para convertir las propiedades del experimento en un diccionario   
     def to_dict(self):
         return ([(k, getattr(self, k)) for k in self.__dict__.keys() if not k.startswith("_")])
 
-# funcion para agregar experimento 
+# Función para agregar un experimento a la lista
+# Solicita al usuario información sobre el experimento y lo agrega a la lista
+# Si ocurre algún error en la entrada, se notifica al usuario 
 def agregarExperimento(listaExperimentos, count):
     
-    IdExperimento = count
+    IdExperimento = count # Genera un nuevo ID basado en el contador
     print('\n===============  Agregar Experimentos  ===============\n')
     nombreExperimento=input("\nIngrese el nombre del experimento: ")
-    fechaExperimento_str=input("\ningrese la fecha del experimento  (DD/MM/AAAA):")
+    fechaExperimento_str=input("\ningrese la fecha del experimento  (DD/MM/AAAA):") 
     try:
-        fechaExperimento=datetime.strptime(fechaExperimento_str,"%d/%m/%Y")
+        fechaExperimento=datetime.strptime(fechaExperimento_str,"%d/%m/%Y") # Validación de fecha
     except Exception as ex:
         print(f"fecha invalida :{ex}")
         return
-    
+      # Validación del tipo de experimento
     while True:
         tipoDeExperimento=input("\nIngrese el tipo de experimento \n 1) fisica, \n 2) biologia, \n 3) quimica: \n")
         if (tipoDeExperimento.lower() == 'fisica') or tipoDeExperimento.lower() == 'biologia' or tipoDeExperimento.lower() == 'quimica':
@@ -43,14 +45,16 @@ def agregarExperimento(listaExperimentos, count):
         
     try:
         resultados = input('Ingrese los resultados separados por coma \n')
-        resultados_separado = list(map(float, resultados.split(","))) 
+        resultados_separado = list(map(float, resultados.split(",")))  # Convierte los resultados en números
     except Exception as ex:
         print('resultados ingresados no validos solo se permite valores numericos')
     analizarPromedio=0.0
     investigacionAdd= InvestigacionCientifica(IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado,analizarPromedio)
     listaExperimentos.append(investigacionAdd)
     print("Experimento agregado exitosamente")
-    
+
+    # Función para visualizar todos los experimentos registrados
+# Imprime las propiedades principales de cada experimento
 def visualizarExperimento(ListaExperimentos):
     if len(ListaExperimentos) <=0:
         print("NO hay experimentos registrados")
@@ -61,7 +65,11 @@ def visualizarExperimento(ListaExperimentos):
         print(f"\nNombre experimento:  {item.nombreExperimento}")
         print(f"\nFecha Experimento: {item.fechaExperimento}")
         print(f"\nTipo Experimento: {item.tipoExperimento}")
-        
+
+    # Función para analizar los resultados de los experimentos
+# Calcula el promedio, el valor máximo y el mínimo de los resultados
+# Actualiza la propiedad analizarPromedio en los experimentos registrados
+    
 def analizarPromedio(ListaExperimentos):
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
@@ -78,13 +86,15 @@ def analizarPromedio(ListaExperimentos):
         resultado.analizarPromedio=promedio
     
 
-
+# Función para eliminar un experimento de la lista
+# Recibe el ID del experimento que se desea eliminar
 def eliminarExperimento(ListaExperimentos, IdExperimento):
     ListaExperimentos.remove(IdExperimento)
     print('La eliminación se realizo con exito')
     visualizarExperimento(ListaExperimentos)
     
-
+# Función para comparar un experimento de la lista
+# Recibe el ID del experimento que se desea comparar
 def compararExperimento(ListaExperimentos):
     visualizarExperimento()
     IdExperimento=list(map(int, input("\nIngrese el Id del experimento a comparar: ").split(",")))
@@ -100,7 +110,8 @@ def compararExperimento(ListaExperimentos):
     for experimento, promedio in resultado_comparados:
         print(f"El experimento {experimento} - {promedio}")
   
-
+# Función para eliminar un experimento de la lista
+# Recibe el ID del experimento que se desea eliminar
 def generarInforme(ListaExperimentos):
     nombreInforme = "informe_investigacion_cientifica.txt"
     path = os.path.abspath(nombreInforme)
@@ -129,14 +140,15 @@ def generarInforme(ListaExperimentos):
     except Exception as e:
         print(f"Error al generar el informe: {e}")
 
-
+# Función para validar si una entrada del menú es numérica
 def validar_seleccion_menu(dato_entrada):
     try:
         return int(dato_entrada)
     except Exception as ex:
         return False
         
-    
+ # Menú principal del sistema de investigación científica
+# Permite al usuario realizar diversas operaciones sobre los experimentos registrados   
 def menuInvestigacionCientifica():
     ListaExperimentos=[]
     count = 0
