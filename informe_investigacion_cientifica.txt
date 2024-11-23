@@ -2,5 +2,11 @@ Nombre experimento: prueba1
 Fecha Experimento: 2024-12-01 00:00:00
 Tipo Experimento: fisica
 Resultados: 30.0, 50.0, 80.0
-Promedio: 53.333333333333336 
+Promedio: 56.666666666666664 
+
+Nombre experimento: prueba2
+Fecha Experimento: 2024-12-05 00:00:00
+Tipo Experimento: quimica
+Resultados: 30.0, 50.0, 90.0
+Promedio: 56.666666666666664 
 
