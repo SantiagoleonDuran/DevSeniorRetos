@@ -5,8 +5,6 @@ import statistics
 import os 
 
 
-
-
 # Clase principal que representa un experimento de investigación científica
 class InvestigacionCientifica:
     # metodo constructor , init es para inicializar el metodo 
@@ -258,7 +256,8 @@ def menuInvestigacionCientifica():
                analizarPromedio(ListaExperimentos)
             if  int(opcionSeleccionada) == 6:
                 compararExperimento(ListaExperimentos)                               
-            if opcionSeleccionada == 7:
+            elif int(opcionSeleccionada) == 7:
+                print('Gracias por utilizar el sistema de investigación científica')
                 break
         else:
             print('Seleccione una opción valida')
