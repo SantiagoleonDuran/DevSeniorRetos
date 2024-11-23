@@ -91,8 +91,30 @@ def analizarPromedio(ListaExperimentos):
 # Función para eliminar un experimento de la lista
 # Recibe el ID del experimento que se desea eliminar 
 def eliminarExperimento(ListaExperimentos, IdExperimento):
-    ListaExperimentos.remove(IdExperimento)
-    print('La eliminación se realizo con exito')
+    # Convertir el ID a entero para asegurarse de que es del tipo correcto
+    try:
+        IdExperimento = int(IdExperimento)
+    except ValueError:
+        print("El ID proporcionado no es válido. Debe ser un número entero.")
+        return
+
+    # Buscar el experimento por ID
+    experimento_a_eliminar = None
+    for experimento in ListaExperimentos:
+        if experimento.IdExperimento == IdExperimento:
+            experimento_a_eliminar = experimento
+            break
+
+    # Si no se encuentra el experimento, informar al usuario
+    if experimento_a_eliminar is None:
+        print(f"No se encontró un experimento con el ID {IdExperimento}.")
+        return
+
+    # Eliminar el experimento y confirmar
+    ListaExperimentos.remove(experimento_a_eliminar)
+    print(f"El experimento con ID {IdExperimento} se eliminó exitosamente.")
+
+    # Mostrar los experimentos restantes
     visualizarExperimento(ListaExperimentos)
     
 # funcion para realizar comparaciones de experimentos con su promedio 
