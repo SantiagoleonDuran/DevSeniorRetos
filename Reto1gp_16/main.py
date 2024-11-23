@@ -73,6 +73,7 @@ def analizarPromedio(ListaExperimentos):
     print(f"El promedio de los resultados es: {round(promedio,2)}  ")
     print(f"El maximo de los resultados es: {maximo}")
     print(f"El minimo de los resultados es: {minimo}")
+    # se agrega el promedio a la lista para generar el  informe 
     for resultado in ListaExperimentos:
         resultado.analizarPromedio=promedio
     
