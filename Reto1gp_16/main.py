@@ -1,10 +1,7 @@
 from datetime import datetime
 from prettytable import PrettyTable
-
 import statistics
 import os 
-
-
 
 
 # Clase principal que representa un experimento de investigación científica
@@ -80,20 +77,27 @@ def visualizarExperimento(ListaExperimentos):
 # Actualiza la propiedad analizarPromedio en los experimentos registrados
     
 def analizarPromedio(ListaExperimentos):
+    print('\n===============  Generar Promedio  ===============\n')
+    table = PrettyTable()
     if not ListaExperimentos:
-        print("NO hay experimentos registrados")
+        print("No hay experimentos registrados")
         return
+    
+    table.field_names = ["Promedio", "Maximo", "Minimo"]
+    promedio = 0
     for experimento in ListaExperimentos:
-          promedio = statistics.mean(experimento.resultados)
-    maximo=max(experimento.resultados)
-    minimo=min(experimento.resultados)
-    print(f"El promedio de los resultados es: {round(promedio,2)}  ")
-    print(f"El maximo de los resultados es: {maximo}")
-    print(f"El minimo de los resultados es: {minimo}")
+        if experimento.resultados:
+            promedio = sum(experimento.resultados) / len(experimento.resultados)
+            experimento.analizarPromedio = round(promedio, 2)
+          
+            maximo=max(experimento.resultados)
+            minimo=min(experimento.resultados)
+            table.add_row([experimento.analizarPromedio, maximo, minimo])
+    # print(f"El promedio de los resultados es: {round(promedio,2)}  ")
+    # print(f"El maximo de los resultados es: {maximo}")
+    # print(f"El minimo de los resultados es: {minimo}")
     # se agrega el promedio a la lista para generar el  informe 
-    for resultado in ListaExperimentos:
-        resultado.analizarPromedio=promedio
-        
+    print(table.get_string(fields=["Promedio", "Maximo", "Minimo"]))
     input("Por favor, presione enter para continuar.")
     
 
@@ -101,6 +105,7 @@ def analizarPromedio(ListaExperimentos):
 # Recibe el ID del experimento que se desea eliminar
 def eliminarExperimento(ListaExperimentos, IdExperimento):
     # Convertir el ID a entero para asegurarse de que es del tipo correcto
+    print('\n===============  Eliminar Experimento  ===============\n')
     try:
         IdExperimento = int(IdExperimento)
     except ValueError:
@@ -131,8 +136,9 @@ def eliminarExperimento(ListaExperimentos, IdExperimento):
 # Función para comparar un experimento de la lista
 # Recibe el ID del experimento que se desea comparar
 def compararExperimento(ListaExperimentos):
-     #Compara el promedio de los resultados de experimentos seleccionados por su ID.
-     #ListaExperimentos: Lista que contiene los experimentos registrados.
+    print('\n===============  Comparar Experimentos  ===============\n')
+    #Compara el promedio de los resultados de experimentos seleccionados por su ID.
+    #ListaExperimentos: Lista que contiene los experimentos registrados.
     
     if not ListaExperimentos:
         print("No hay experimentos registrados para comparar.")
@@ -184,7 +190,7 @@ def compararExperimento(ListaExperimentos):
 # Función para eliminar un experimento de la lista
 # Recibe el ID del experimento que se desea eliminar
 def generarInforme(ListaExperimentos):
-    
+    print('\n===============  Generar Informe ===============\n')
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
@@ -233,17 +239,20 @@ def menuInvestigacionCientifica():
         print('1) Agregar experimento ')
         print('2) Visualizar experimento ')
         print('3) Eliminar experimento ')
-        print('4) Generar informe ')
-        print('5) Promedio experimento ')
-        print('6) Comparar experimento ')
+        print('4) Generar Promedio')
+        print('5) Comparar experimento ')
+        print('6) Generar informe ')
         print('7) Salir (exit)')
         opcionSeleccionada = input('\n====Selecciona la opción que desea realizar====\n')
         if validar_seleccion_menu(opcionSeleccionada):
             count += 1 # Se crear un contador para el id del experimetno
+            #Agregar experimento
             if int(opcionSeleccionada) == 1:
                 agregarExperimento(ListaExperimentos, count)
+            #Listar experimento
             if int(opcionSeleccionada) == 2:
                 visualizarExperimento(ListaExperimentos)
+            #Eliminar experimento
             if int(opcionSeleccionada) == 3:
                 while True:
                     IdExperimento = input('Ingrese el Id del experimento que desea eliminar: ')
@@ -252,12 +261,16 @@ def menuInvestigacionCientifica():
                         break
                     else:
                         print('El Id ingresado no es valido')
-            if int(opcionSeleccionada) == 4:
-                generarInforme(ListaExperimentos)
-            if  int(opcionSeleccionada) == 5:
+            #Generar promedio
+            if  int(opcionSeleccionada) == 4:
                analizarPromedio(ListaExperimentos)
-            if  int(opcionSeleccionada) == 6:
-                compararExperimento(ListaExperimentos)                               
+            #Comparar experimento
+            if  int(opcionSeleccionada) == 5:
+                compararExperimento(ListaExperimentos)
+            #Generar Informe
+            if int(opcionSeleccionada) == 6:
+                generarInforme(ListaExperimentos)
+            #Salida segura
             if opcionSeleccionada == 7:
                 break
         else:

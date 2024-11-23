@@ -70,8 +70,9 @@ Es el punto de entrada principal del sistema. Contiene un menú interactivo con 
 1. Agregar experimento.
 2. Visualizar experimento.
 3. Eliminar experimento.
-4. Generar informe.
-5. Analizar promedio de resultados.
-6. Salir del programa.
+4. Generar Promedio
+5. Comparar experimento.
+6. Generar informe 
+7. Salir 
 
 Cada opción llama a las funciones correspondientes según la selección del usuario.
