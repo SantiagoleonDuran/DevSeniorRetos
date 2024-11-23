@@ -1,4 +1,5 @@
 from datetime import datetime
+from prettytable import PrettyTable
 
 import statistics
 import os 
@@ -25,8 +26,8 @@ class InvestigacionCientifica:
 # Si ocurre algún error en la entrada, se notifica al usuario 
 def agregarExperimento(listaExperimentos, count):
     
-    IdExperimento = count # Genera un nuevo ID basado en el contador
     print('\n===============  Agregar Experimentos  ===============\n')
+    IdExperimento = count # Genera un nuevo ID basado en el contador
     nombreExperimento=input("\nIngrese el nombre del experimento: ")
     fechaExperimento_str=input("\ningrese la fecha del experimento  (DD/MM/AAAA):") 
     try:
@@ -36,7 +37,7 @@ def agregarExperimento(listaExperimentos, count):
         return
       # Validación del tipo de experimento
     while True:
-        tipoDeExperimento=input("\nIngrese el tipo de experimento \n 1) fisica, \n 2) biologia, \n 3) quimica: \n")
+        tipoDeExperimento=input("\nPor favor, escriba el nombre del experimento que desea realizar. \n 1) fisica, \n 2) biologia, \n 3) quimica: \n")
         if (tipoDeExperimento.lower() == 'fisica') or tipoDeExperimento.lower() == 'biologia' or tipoDeExperimento.lower() == 'quimica':
             tipoExperimento = tipoDeExperimento
             break
@@ -51,22 +52,30 @@ def agregarExperimento(listaExperimentos, count):
     analizarPromedio=0.0
     investigacionAdd= InvestigacionCientifica(IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado,analizarPromedio)
     listaExperimentos.append(investigacionAdd)
-    print("Experimento agregado exitosamente")
+    print("\nExperimento agregado exitosamente\n")
+    # Una vez ingrese el esperimento se activa el metodo para visualizar los registros
+    visualizarExperimento(listaExperimentos)
 
     # Función para visualizar todos los experimentos registrados
 # Imprime las propiedades principales de cada experimento
 def visualizarExperimento(ListaExperimentos):
+    table = PrettyTable()
+    print('\n===============  Lista de experimentos creados  ===============\n')
+    
     if len(ListaExperimentos) <=0:
         print("NO hay experimentos registrados")
         return
-        
+    
+    table.field_names = ["Id Experimento", "Nombre Experimento", "Fecha Experimento", "Tipo Experimento", "Resultado", "Promedio"]
+    
     for item in ListaExperimentos:
-        print(f"\nId Experimento: {item.IdExperimento}") 
-        print(f"\nNombre experimento:  {item.nombreExperimento}")
-        print(f"\nFecha Experimento: {item.fechaExperimento}")
-        print(f"\nTipo Experimento: {item.tipoExperimento}")
+        table.add_row([item.IdExperimento, item.nombreExperimento, item.fechaExperimento, item.tipoExperimento, item.resultados, item.analizarPromedio])
+        
+    print(table.get_string(fields=["Id Experimento", "Nombre Experimento", "Fecha Experimento", "Tipo Experimento", "Resultado", "Promedio"]))
+        
+    input("por favor, presione enter para continuar.")
 
-    # Función para analizar los resultados de los experimentos
+# Función para analizar los resultados de los experimentos
 # Calcula el promedio, el valor máximo y el mínimo de los resultados
 # Actualiza la propiedad analizarPromedio en los experimentos registrados
     
@@ -84,6 +93,8 @@ def analizarPromedio(ListaExperimentos):
     # se agrega el promedio a la lista para generar el  informe 
     for resultado in ListaExperimentos:
         resultado.analizarPromedio=promedio
+        
+    input("Por favor, presione enter para continuar.")
     
 
 # Función para eliminar un experimento de la lista
@@ -114,24 +125,24 @@ def eliminarExperimento(ListaExperimentos, IdExperimento):
 
     # Mostrar los experimentos restantes
     visualizarExperimento(ListaExperimentos)
+    input("Por favor, presione enter para continuar.")
 
     
 # Función para comparar un experimento de la lista
 # Recibe el ID del experimento que se desea comparar
 def compararExperimento(ListaExperimentos):
-    """
-    Compara el promedio de los resultados de experimentos seleccionados por su ID.
+     #Compara el promedio de los resultados de experimentos seleccionados por su ID.
+     #ListaExperimentos: Lista que contiene los experimentos registrados.
     
-     ListaExperimentos: Lista que contiene los experimentos registrados.
-    """
     if not ListaExperimentos:
         print("No hay experimentos registrados para comparar.")
+        input("Por favor, oprima enter para continuar")
         return
 
     # Mostrar todos los experimentos disponibles
     print("\nLista de experimentos registrados:")
     for experimento in ListaExperimentos:
-        print(f"ID: {experimento.IdExperimento} - Nombre: {experimento.nombreExperimento}")
+        print(f"Id experimento: {experimento.IdExperimento} - Nombre experimento: {experimento.nombreExperimento}")
 
     # Solicitar al usuario los IDs de los experimentos a comparar
     ids_input = input("\nIngrese los IDs de los experimentos a comparar, separados por comas: ").strip()
@@ -155,8 +166,10 @@ def compararExperimento(ListaExperimentos):
     # Calcular y mostrar los promedios de cada experimento
     resultados_comparados = []
     for experimento in experimentos_comparar:
-        promedio = statistics.mean(experimento.resultados)
-        resultados_comparados.append((experimento.nombreExperimento, promedio))
+        promedio = 0
+        if experimento.resultados:
+            promedio = sum(experimento.resultados) / len(experimento.resultados)
+            resultados_comparados.append((experimento.nombreExperimento, promedio))
 
     # Ordenar los resultados por promedio
     resultados_comparados.sort(key=lambda x: x[1])
@@ -165,10 +178,17 @@ def compararExperimento(ListaExperimentos):
     print("\nResultados de la comparación (ordenados por promedio):")
     for nombre, promedio in resultados_comparados:
         print(f"Experimento: {nombre} - Promedio: {promedio:.2f}")
+    
+    input("Por favor presione enter para continuar.")
   
 # Función para eliminar un experimento de la lista
 # Recibe el ID del experimento que se desea eliminar
 def generarInforme(ListaExperimentos):
+    
+    if not ListaExperimentos:
+        print("NO hay experimentos registrados")
+        return
+    
     nombreInforme = "informe_investigacion_cientifica.txt"
     path = os.path.abspath(nombreInforme)
     directorio=os.path.dirname(path)    
@@ -176,22 +196,20 @@ def generarInforme(ListaExperimentos):
         os.makedirs(directorio)
         print("Directorio creado exitosamente")
     # Validar si hay experimentos registrados
-    if not ListaExperimentos:
-        print("NO hay experimentos registrados")
-        return
-    
+        
     try:
         # Abrir el archivo para escritura
         with open(path, "w") as informe:
             for experimento in ListaExperimentos:
-                
-                informe.write(f"Nombre experimento: {experimento.nombreExperimento}\n")
-                informe.write(f"Fecha Experimento: {experimento.fechaExperimento}\n")
-                informe.write(f"Tipo Experimento: {experimento.tipoExperimento}\n")
+                informe.write(f"Id Experimento: {experimento.IdExperimento}")
+                informe.write(f"Nombre experimento: {experimento.nombreExperimento}")
+                informe.write(f"Fecha Experimento: {experimento.fechaExperimento}")
+                informe.write(f"Tipo Experimento: {experimento.tipoExperimento}")
                 informe.write("Resultados: " + ", ".join(map(str, experimento.resultados)) + "\n")
-                informe.write(f"Promedio: {experimento.analizarPromedio} \n")
+                informe.write(f"Promedio: {experimento.analizarPromedio}")
                 informe.write("\n") 
         print("Informe generado exitosamente como informe_investigacion_cientifica.txt")
+        input("por favor, presione enter para continuar.")
     
     except Exception as e:
         print(f"Error al generar el informe: {e}")
@@ -208,18 +226,9 @@ def validar_seleccion_menu(dato_entrada):
 def menuInvestigacionCientifica():
     ListaExperimentos=[]
     count = 0
-  
-    
-    # file name    
-    file_name = 'GFG.txt'
-  
-  
-    # prints the absolute path of current 
-    # working directory with  file name 
-    print(os.path.abspath(file_name))
+
     while True:
-        print('\n ===============Bienvenido al sistema de Investigación cientifica=============== ')
-        print('====Selecciona la opción que desea realizar====')
+        print('\n ===============Bienvenido al sistema de investigación científica=============== ')
         print('\n')
         print('1) Agregar experimento ')
         print('2) Visualizar experimento ')
@@ -228,15 +237,16 @@ def menuInvestigacionCientifica():
         print('5) Promedio experimento ')
         print('6) Comparar experimento ')
         print('7) Salir (exit)')
-        opcionSeleccionada = input('****Seleccione Opción**** \n')
+        opcionSeleccionada = input('\n====Selecciona la opción que desea realizar====\n')
         if validar_seleccion_menu(opcionSeleccionada):
+            count += 1 # Se crear un contador para el id del experimetno
             if int(opcionSeleccionada) == 1:
-                agregarExperimento(ListaExperimentos, count+1)
+                agregarExperimento(ListaExperimentos, count)
             if int(opcionSeleccionada) == 2:
                 visualizarExperimento(ListaExperimentos)
             if int(opcionSeleccionada) == 3:
                 while True:
-                    IdExperimento = input('Ingrese el Id del experimento que desea eliminar')
+                    IdExperimento = input('Ingrese el Id del experimento que desea eliminar: ')
                     if validar_seleccion_menu(IdExperimento):
                         eliminarExperimento(ListaExperimentos, IdExperimento)
                         break
