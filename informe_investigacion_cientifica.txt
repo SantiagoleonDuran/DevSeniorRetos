@@ -1,4 +1,4 @@
-Id Experimento: 1Nombre experimento: datos 1Fecha Experimento: 2024-10-20 00:00:00Tipo Experimento: fisicaResultados: 20.0, 30.0, 40.0
-Promedio: 0.0
-Id Experimento: 2Nombre experimento: datos 2Fecha Experimento: 2024-10-20 00:00:00Tipo Experimento: biologiaResultados: 20.0, 30.0, 50.0
-Promedio: 0.0
+Id Experimento: 2Nombre experimento: experimento dosFecha Experimento: 2024-10-20 00:00:00Tipo Experimento: biologiaResultados: 20.0, 30.0, 40.0
+Promedio: 23.333333333333332
+Id Experimento: 5Nombre experimento: experimento 3Fecha Experimento: 2024-09-20 00:00:00Tipo Experimento: quimicaResultados: 20.0, 10.0, 40.0
+Promedio: 23.333333333333332
