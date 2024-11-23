@@ -1,25 +1,33 @@
+# Proyecto de Investigación Científica
 from datetime import datetime
 
 import statistics
-import os.path 
+import os 
 
 
 
 
 
+## Estructura del Código
+
+### Clase `InvestigacionCientifica`
 class InvestigacionCientifica:
     # metodo constructor , init es para inicializar el metodo 
-    def __init__(self,IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados):
+    def __init__(self,IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados,analizarPromedio):
         self.IdExperimento = IdExperimento
         self.nombreExperimento=nombreExperimento
         self.fechaExperimento=fechaExperimento
         self.tipoExperimento=tipoExperimento
         self.resultados = resultados
-        
+        self.analizarPromedio=analizarPromedio
+       # Método para convertir las propiedades del experimento en un diccionario  
     def to_dict(self):
         return ([(k, getattr(self, k)) for k in self.__dict__.keys() if not k.startswith("_")])
+### Funciones
 
-# funcion para agregar experimento 
+# Función para agregar un experimento a la lista
+# Solicita al usuario información sobre el experimento y lo agrega a la lista
+# Si ocurre algún error en la entrada, se notifica al usuario
 def agregarExperimento(listaExperimentos, count):
     
     IdExperimento = count
@@ -45,23 +53,27 @@ def agregarExperimento(listaExperimentos, count):
         resultados_separado = list(map(float, resultados.split(","))) 
     except Exception as ex:
         print('resultados ingresados no validos solo se permite valores numericos')
-        
-    investigacionAdd= InvestigacionCientifica(IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado)
+    analizarPromedio=0.0
+    investigacionAdd= InvestigacionCientifica(IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado,analizarPromedio)
     listaExperimentos.append(investigacionAdd)
     print("Experimento agregado exitosamente")
-    
+ # Función para visualizar todos los experimentos registrados
+# Imprime las propiedades principales de cada experimento
+
 def visualizarExperimento(ListaExperimentos):
     if len(ListaExperimentos) <=0:
         print("NO hay experimentos registrados")
         return
         
     for item in ListaExperimentos:
-         
+        print(f"\nId Experimento: {item.IdExperimento}") 
         print(f"\nNombre experimento:  {item.nombreExperimento}")
         print(f"\nFecha Experimento: {item.fechaExperimento}")
         print(f"\nTipo Experimento: {item.tipoExperimento}")
-        
-def analizarpromedio(ListaExperimentos):
+   # Función para analizar los resultados de los experimentos
+# Calcula el promedio, el valor máximo y el mínimo de los resultados
+# Actualiza la propiedad analizarPromedio en los experimentos registrados   
+def analizarPromedio(ListaExperimentos):
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
@@ -72,45 +84,79 @@ def analizarpromedio(ListaExperimentos):
     print(f"El promedio de los resultados es: {round(promedio,2)}  ")
     print(f"El maximo de los resultados es: {maximo}")
     print(f"El minimo de los resultados es: {minimo}")
-
+    # se agrega el promedio a la lista para generar el  informe 
+    for resultado in ListaExperimentos:
+        resultado.analizarPromedio=promedio
+    
+# Función para eliminar un experimento de la lista
+# Recibe el ID del experimento que se desea eliminar 
 def eliminarExperimento(ListaExperimentos, IdExperimento):
     ListaExperimentos.remove(IdExperimento)
     print('La eliminación se realizo con exito')
     visualizarExperimento(ListaExperimentos)
     
-
-def compararExperimento():
-    pass
+# funcion para realizar comparaciones de experimentos con su promedio 
+def compararExperimento(ListaExperimentos):
+    
+    visualizarExperimento()
+    IdExperimento=list(map(int, input("\nIngrese el Id del experimento a comparar: ").split(",")))
+    resultado_comparados=[]
+    for index in IdExperimento:
+         if(index == IdExperimento[0]):
+             promedio=sum(ListaExperimentos.promedio)/len(ListaExperimentos.resultados)
+             resultado_comparados.append(promedio)
+         else:
+             print(f"El id {index} no se encuentra registrado")
+             resultado_comparados.sort()
+             print(f"resultado comparados")
+    for experimento, promedio in resultado_comparados:
+         print(f"El experimento {experimento} - {promedio}")
+  
+# Función para generar un informe en un archivo de texto
+# Incluye los datos principales de cada experimento registrado
 
 def generarInforme(ListaExperimentos):
-    nombreInforme="informe_investigacion_cientifica.txt"
-    path=os.path.abspath(nombreInforme)
+    nombreInforme = "informe_investigacion_cientifica.txt"
+    path = os.path.abspath(nombreInforme)
+    directorio=os.path.dirname(path)    
+    if directorio and not os.path.exists(directorio):
+        os.makedirs(directorio)
+        print("Directorio creado exitosamente")
+    # Validar si hay experimentos registrados
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
-     # se abre un archivo txt para escribir el informe
-    with open(path, "w") as informe: 
-        #se escriben los detalles de la investigacion cientifica
-     for experimento in ListaExperimentos:
-        informe.write(f"\nNombre experimento:  {experimento.nombreExperimento}\n")
-        informe.write(f"\nFecha Experimento: {experimento.fechaExperimento}\n")
-        informe.write(f"\nTipo Experimento: {experimento.tipoExperimento}\n") 
-      
-        informe.write("\n")
-        print("informe generado como informe_investigacion_cientifica.txt")
+    
+    try:
+        # Abrir el archivo para escritura
+        with open(path, "w") as informe:
+            for experimento in ListaExperimentos:
+                
+                informe.write(f"Nombre experimento: {experimento.nombreExperimento}\n")
+                informe.write(f"Fecha Experimento: {experimento.fechaExperimento}\n")
+                informe.write(f"Tipo Experimento: {experimento.tipoExperimento}\n")
+                informe.write("Resultados: " + ", ".join(map(str, experimento.resultados)) + "\n")
+                informe.write(f"Promedio: {experimento.analizarPromedio} \n")
+                informe.write("\n") 
+        print("Informe generado exitosamente como informe_investigacion_cientifica.txt")
+    
+    except Exception as e:
+        print(f"Error al generar el informe: {e}")
 
-
+#### La funcion validar permite validar que los datos ingresados sean correctos
 def validar_seleccion_menu(dato_entrada):
     try:
         return int(dato_entrada)
     except Exception as ex:
         return False
         
-    
+   #### `menuInvestigacionCientifica` 
+   # Es el punto de entrada principal del sistema. Contiene un menú interactivo con las siguientes opciones:
+ 
 def menuInvestigacionCientifica():
     ListaExperimentos=[]
     count = 0
-    ListaExperimentos=[]
+  
     
     # file name    
     file_name = 'GFG.txt'
@@ -128,7 +174,8 @@ def menuInvestigacionCientifica():
         print('3) Eliminar experimento ')
         print('4) Generar informe ')
         print('5) Promedio experimento ')
-        print('6) Salir (exit)')
+        print('6) Comparar experimento ')
+        print('7) Salir (exit)')
         opcionSeleccionada = input('****Seleccione Opción**** \n')
         if validar_seleccion_menu(opcionSeleccionada):
             if int(opcionSeleccionada) == 1:
@@ -146,14 +193,15 @@ def menuInvestigacionCientifica():
             if int(opcionSeleccionada) == 4:
                 generarInforme(ListaExperimentos)
             if  int(opcionSeleccionada) == 5:
-               analizarpromedio(ListaExperimentos)
-            if opcionSeleccionada == 6:
+               analizarPromedio(ListaExperimentos)
+            if  int(opcionSeleccionada) == 6:
+                compararExperimento(ListaExperimentos)                               
+            if opcionSeleccionada == 7:
                 break
         else:
             print('Seleccione una opción valida')
     
 if __name__ == '__main__': 
-
   menuInvestigacionCientifica()
 
 
