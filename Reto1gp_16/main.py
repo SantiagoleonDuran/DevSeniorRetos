@@ -14,9 +14,6 @@ class InvestigacionCientifica:
         self.tipoExperimento=tipoExperimento
         self.resultados = resultados
         self.analizarPromedio=analizarPromedio
-     # Método para convertir las propiedades del experimento en un diccionario   
-    def to_dict(self):
-        return ([(k, getattr(self, k)) for k in self.__dict__.keys() if not k.startswith("_")])
 
 # Función para agregar un experimento a la lista
 # Solicita al usuario información sobre el experimento y lo agrega a la lista
