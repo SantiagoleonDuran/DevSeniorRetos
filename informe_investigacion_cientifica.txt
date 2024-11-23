@@ -1,3 +1,6 @@
-Nombre experimento: prueba
+Nombre experimento: prueba1
 Fecha Experimento: 2024-12-01 00:00:00
 Tipo Experimento: fisica
+Resultados: 30.0, 50.0, 70.0
+Promedio: 50.0 
+

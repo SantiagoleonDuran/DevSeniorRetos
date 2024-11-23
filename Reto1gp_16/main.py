@@ -9,12 +9,13 @@ import os
 
 class InvestigacionCientifica:
     # metodo constructor , init es para inicializar el metodo 
-    def __init__(self,IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados):
+    def __init__(self,IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados,analizarPromedio):
         self.IdExperimento = IdExperimento
         self.nombreExperimento=nombreExperimento
         self.fechaExperimento=fechaExperimento
         self.tipoExperimento=tipoExperimento
         self.resultados = resultados
+        self.analizarPromedio=analizarPromedio
         
     def to_dict(self):
         return ([(k, getattr(self, k)) for k in self.__dict__.keys() if not k.startswith("_")])
@@ -45,8 +46,8 @@ def agregarExperimento(listaExperimentos, count):
         resultados_separado = list(map(float, resultados.split(","))) 
     except Exception as ex:
         print('resultados ingresados no validos solo se permite valores numericos')
-        
-    investigacionAdd= InvestigacionCientifica(IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado)
+    analizarPromedio=0.0
+    investigacionAdd= InvestigacionCientifica(IdExperimento, nombreExperimento,fechaExperimento,tipoExperimento, resultados_separado,analizarPromedio)
     listaExperimentos.append(investigacionAdd)
     print("Experimento agregado exitosamente")
     
@@ -61,7 +62,7 @@ def visualizarExperimento(ListaExperimentos):
         print(f"\nFecha Experimento: {item.fechaExperimento}")
         print(f"\nTipo Experimento: {item.tipoExperimento}")
         
-def analizarpromedio(ListaExperimentos):
+def analizarPromedio(ListaExperimentos):
     if not ListaExperimentos:
         print("NO hay experimentos registrados")
         return
@@ -72,6 +73,10 @@ def analizarpromedio(ListaExperimentos):
     print(f"El promedio de los resultados es: {round(promedio,2)}  ")
     print(f"El maximo de los resultados es: {maximo}")
     print(f"El minimo de los resultados es: {minimo}")
+    for resultado in ListaExperimentos:
+        resultado.analizarPromedio=promedio
+    
+
 
 def eliminarExperimento(ListaExperimentos, IdExperimento):
     ListaExperimentos.remove(IdExperimento)
@@ -103,6 +108,7 @@ def generarInforme(ListaExperimentos):
                 informe.write(f"Fecha Experimento: {experimento.fechaExperimento}\n")
                 informe.write(f"Tipo Experimento: {experimento.tipoExperimento}\n")
                 informe.write("Resultados: " + ", ".join(map(str, experimento.resultados)) + "\n")
+                informe.write(f"Promedio: {experimento.analizarPromedio} \n")
                 informe.write("\n") 
         print("Informe generado exitosamente como informe_investigacion_cientifica.txt")
     
@@ -156,7 +162,7 @@ def menuInvestigacionCientifica():
             if int(opcionSeleccionada) == 4:
                 generarInforme(ListaExperimentos)
             if  int(opcionSeleccionada) == 5:
-               analizarpromedio(ListaExperimentos)
+               analizarPromedio(ListaExperimentos)
             if opcionSeleccionada == 6:
                 break
         else:
