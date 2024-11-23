@@ -1,5 +1,0 @@
-Nombre experimento: prueba
-Fecha Experimento: 2024-12-01 00:00:00
-Tipo Experimento: fisica
-Resultados: 30.0, 50.0, 90.0
-

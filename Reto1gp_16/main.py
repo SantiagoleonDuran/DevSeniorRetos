@@ -102,6 +102,7 @@ def generarInforme(ListaExperimentos):
                 informe.write(f"Nombre experimento: {experimento.nombreExperimento}\n")
                 informe.write(f"Fecha Experimento: {experimento.fechaExperimento}\n")
                 informe.write(f"Tipo Experimento: {experimento.tipoExperimento}\n")
+                
                 informe.write("Resultados: " + ", ".join(map(str, experimento.resultados)) + "\n")
                 informe.write("\n") 
         print("Informe generado exitosamente como informe_investigacion_cientifica.txt")
