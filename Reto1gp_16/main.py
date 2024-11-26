@@ -1,6 +1,5 @@
 from datetime import datetime
 from prettytable import PrettyTable
-import statistics
 import os 
 
 
@@ -50,7 +49,7 @@ def agregarExperimento(listaExperimentos, count):
     # Una vez ingrese el esperimento se activa el metodo para visualizar los registros
     visualizarExperimento(listaExperimentos)
 
-    # Función para visualizar todos los experimentos registrados
+# Función para visualizar todos los experimentos registrados
 # Imprime las propiedades principales de cada experimento
 def visualizarExperimento(ListaExperimentos):
     table = PrettyTable()
