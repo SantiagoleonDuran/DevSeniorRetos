@@ -1,6 +1,0 @@
-Id Experimento: 1Nombre experimento: nuevo Fecha Experimento: 2024-01-20 00:00:00Tipo Experimento: fisicaResultados: 20.0, 30.0, 40.0
-Promedio: 30.0
-Id Experimento: 2Nombre experimento: ddFecha Experimento: 2024-10-20 00:00:00Tipo Experimento: biologiaResultados: 20.0, 30.0, 40.0
-Promedio: 30.0
-Id Experimento: 3Nombre experimento: dddd22222gdgjgfjdgfjdgjjgdjgfjdfjfFecha Experimento: 2024-07-20 00:00:00Tipo Experimento: quimicaResultados: 10.0, 80.0, 50.0
-Promedio: 46.67

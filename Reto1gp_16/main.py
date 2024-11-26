@@ -266,7 +266,7 @@ def menuInvestigacionCientifica():
                 generarInforme(ListaExperimentos)
             #Salida segura
             if int(opcionSeleccionada) == 7:
-                print('Grcias por utilizar el sistema investigación científica \n')
+                print('Gracias por utilizar el sistema investigación científica \n')
                 break
         else:
             print('Seleccione una opción valida')
