@@ -89,9 +89,7 @@ def analizarPromedio(ListaExperimentos):
             maximo=max(experimento.resultados)
             minimo=min(experimento.resultados)
             table.add_row([experimento.analizarPromedio, maximo, minimo])
-    # print(f"El promedio de los resultados es: {round(promedio,2)}  ")
-    # print(f"El maximo de los resultados es: {maximo}")
-    # print(f"El minimo de los resultados es: {minimo}")
+
     # se agrega el promedio a la lista para generar el  informe 
     print(table.get_string(fields=["Promedio", "Maximo", "Minimo"]))
     input("Por favor, presione enter para continuar.")
