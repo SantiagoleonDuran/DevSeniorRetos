@@ -89,9 +89,6 @@ def analizarPromedio(ListaExperimentos):
             maximo=max(experimento.resultados)
             minimo=min(experimento.resultados)
             table.add_row([experimento.analizarPromedio, maximo, minimo])
-    # print(f"El promedio de los resultados es: {round(promedio,2)}  ")
-    # print(f"El maximo de los resultados es: {maximo}")
-    # print(f"El minimo de los resultados es: {minimo}")
     # se agrega el promedio a la lista para generar el  informe 
     print(table.get_string(fields=["Promedio", "Maximo", "Minimo"]))
     input("Por favor, presione enter para continuar.")
@@ -203,10 +200,10 @@ def generarInforme(ListaExperimentos):
         # Abrir el archivo para escritura
         with open(path, "w") as informe:
             for experimento in ListaExperimentos:
-                informe.write(f"Id Experimento: {experimento.IdExperimento}")
-                informe.write(f"Nombre experimento: {experimento.nombreExperimento}")
-                informe.write(f"Fecha Experimento: {experimento.fechaExperimento}")
-                informe.write(f"Tipo Experimento: {experimento.tipoExperimento}")
+                informe.write(f"Id Experimento: {experimento.IdExperimento} \n")
+                informe.write(f"Nombre experimento: {experimento.nombreExperimento} \n")
+                informe.write(f"Fecha Experimento: {experimento.fechaExperimento} \n")
+                informe.write(f"Tipo Experimento: {experimento.tipoExperimento} \n")
                 informe.write("Resultados: " + ", ".join(map(str, experimento.resultados)) + "\n")
                 informe.write(f"Promedio: {experimento.analizarPromedio}")
                 informe.write("\n") 
@@ -268,7 +265,7 @@ def menuInvestigacionCientifica():
                 generarInforme(ListaExperimentos)
             #Salida segura
             if int(opcionSeleccionada) == 7:
-                print('Grcias por utilizar el sistema investigación científica \n')
+                print('Gracias por utilizar el sistema investigación científica \n')
                 break
         else:
             print('Seleccione una opción valida')
