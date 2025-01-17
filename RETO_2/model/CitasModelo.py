@@ -1,4 +1,4 @@
-class Cita:
+class CitasModelo:
     def __init__ (self,fecha,hora,servicio,veterinario):
         self.fecha=fecha
         self.hora=hora
