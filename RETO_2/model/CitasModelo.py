@@ -3,7 +3,8 @@ class CitasModelo:
         self.fecha=fecha
         self.hora=hora
         self.servicio=servicio
-        self.vereterinario=veterinario
+        self.veterinario=veterinario
+        
     def mostrar_info(self):
         print(f"Cita:{self.fecha}{self.hora}-{self.servicio}-con {self.veterinario}")
 

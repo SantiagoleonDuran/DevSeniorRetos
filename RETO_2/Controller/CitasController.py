@@ -1,18 +1,21 @@
-# from model.ClienteModelo import ClienteModelo
-# from model.MascotaModelo import MascotaModelo
-from model.CitasModelo import CitasModelo
+from Model.CitasModelo import CitasModelo
+from Model.ClienteModelo import ClienteModelo
 from utils.Validaciones import validar_fecha,validar_hora
 from datetime import datetime
 
-
 class CitasController:
+    
+    def __init__(self):
+        self.cliente_modelo = ClienteModelo("","","")
+    
     def programar_cita(self):
         print("\n--Programar cita---")
-        if not self.clientes:
+        cliente = self.cliente_modelo.obtener_clientes()
+        if not cliente:
             print("No hay clientes registrados. Debe registrar primero un cliente.")
             return
         nombre_cliente=input("ingrese el nombre del propietario :")
-        cliente = next ((c for c in self.clientes if c.nombre==nombre_cliente),None)
+        cliente = next((c for c in cliente if c.nombre==nombre_cliente),None)
 
         if cliente:
             nombre_mascota=input("Ingrese el nombre de la mascota:")
@@ -23,26 +26,30 @@ class CitasController:
                  while not validar_fecha(fecha):
                      print("Fecha no valida. Use el formato YYYY-MM-DD.")
                      fecha = input("Fecha de la cita (YYYY-MM-DD): ")
-                     hora= input("Hora de la cita (HH:MM): ")
+                     
+                 hora = input("Hora de la cita (HH:MM): ")
                  while not validar_hora(hora):
-                         
                          print("Hora no valida. Use el formato HH:MM.")
                          hora = input("Hora de la cita (HH:MM): ")
                  servicio=input("Servicio(consulta,vacunacion,desparacitacion,etc):")
                  veterinario=input("Ingrese nombre veterinario asignado:")
                  cita=CitasModelo(fecha,hora,servicio,veterinario)
-                 mascota.agregar_citamodelo(cita)
+                 mascota.agregar_cita(cita)
                  print(f"Cita programada para mascota {mascota.nombre} el {fecha} a las {hora} con veterinario {veterinario}")
             else:
                 print("Mascota no encontrada") 
         else:
-            print("Cliente no encontrado") 
+            print("Cliente no encontrado")
+            
     def actualizar_cita(self):
         try:
+            
+            clientes = self.cliente_modelo.obtener_clientes()
+            
             nombre_cliente = input("Ingrese el nombre del cliente: ").strip()
             nombre_mascota = input("Ingrese el nombre de la mascota: ").strip()
             
-            cliente = next((c for c in self.clientes if c.nombre == nombre_cliente), None)
+            cliente = next((c for c in clientes if c.nombre == nombre_cliente), None)
             if not cliente:
                 raise ValueError("Cliente no encontrado.")
 
@@ -86,11 +93,12 @@ class CitasController:
 
     def consultar_historial(self):
         print("\n--Historial de citas---")
-        if not self.clientes:
+        cliente = self.cliente_modelo.obtener_clientes()
+        if not cliente:
             print("No hay clientes registrados. Debe registrar primero un cliente.")
             return
         nombre_cliente=input("ingrese el nombre del propietario :")
-        cliente=next((c for c in self.clientes if c.nombre==nombre_cliente),None)
+        cliente=next((c for c in cliente if c.nombre==nombre_cliente),None)
 
         if cliente:
             nombre_mascota=input("Ingrese el nombre de la mascota:")
@@ -102,10 +110,6 @@ class CitasController:
                 print("Citas programadas:")
                 for cita in mascota.historial_citas:
                     cita.mostrar_info()
-                print("-"*50)
-                print("Servicios realizados:")
-                for servicio in mascota.historial_servicios:
-                    print(f"-{servicio}")
                 print("-"*50)
             else:
                 print("Mascota no encontrada") 

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Persona(ABC):
+class PersonaModelo(ABC):
 
     def __init__(self,nombre,telefono,direccion):
         self._nombre=nombre

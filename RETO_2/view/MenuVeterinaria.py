@@ -1,9 +1,10 @@
 from Controller.CitasController import CitasController
 from Controller.ClienteController import ClienteController
 from Controller.MascotaController import MascotaController
+
 def mostrar_menu_principal():
     print("\n==============================")
-    print("     SISTEMA DE VETERINARIA")
+    print("     SISTEMA DE VETERINARIA     ")
     print("==============================")
     print("1. Registrar Cliente")
     print("2. Registrar Mascota")
@@ -17,20 +18,19 @@ def mostrar_menu_principal():
 
 def view():
 
-
     while True:
         opcion = mostrar_menu_principal()
 
         if opcion == "1":
-            ClienteController.registrar_cliente()
+            ClienteController().registrar_cliente_controller()
         elif opcion == "2":
-            MascotaController.registrar_mascota()
+            MascotaController().registrar_mascota()
         elif opcion == "3":
-            CitasController.programar_cita()
+            CitasController().programar_cita()
         elif opcion == "4":
-            CitasController.consultar_historial()
+            CitasController().consultar_historial()
         elif opcion == "5":
-            CitasController.actualizar_cita()
+            CitasController().actualizar_cita()
         elif opcion == "6":
             print("\nGracias por utilizar el sistema. ¡Hasta luego!")
             break

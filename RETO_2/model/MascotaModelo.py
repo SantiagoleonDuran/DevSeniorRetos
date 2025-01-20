@@ -1,4 +1,4 @@
-class Mascota:
+class MascotaModelo:
     def __init__(self,nombre,raza,especie,edad):
         self.nombre=nombre
         self.raza=raza
@@ -6,8 +6,6 @@ class Mascota:
         self.edad=edad  
         self.historial_citas=[]
         self.historial_servicios=[]
-
-
 
     def agregar_cita(self,cita):
         self.historial_citas.append(cita)

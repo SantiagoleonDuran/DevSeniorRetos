@@ -1,5 +1,6 @@
-import re
 import datetime
+import re
+
 
 def Validad_telefono(telefono):
     return bool(re.match(r'^\+?\d{7,15}$', telefono))

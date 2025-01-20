@@ -1,4 +1,4 @@
-from view.MenuVeterinaria import view
+from View.MenuVeterinaria import view
 
 def main(): 
     view()
